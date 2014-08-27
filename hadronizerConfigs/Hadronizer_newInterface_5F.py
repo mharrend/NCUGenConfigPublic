@@ -96,8 +96,8 @@ process.generator = cms.EDFilter("Pythia8HadronizerFilter",
         #'JetMatching:coneRadius = 1.',
         'JetMatching:slowJetPower = 1',
         'JetMatching:qCut = 20.', #this is the actual merging scale
-        'JetMatching:nQmatch = 4', #4 corresponds to 4-flavour scheme (no matching of b-quarks), 5 for 5-flavour scheme
-        'JetMatching:nJetMax = 2', #number of partons in born matrix element for highest multiplicity
+        'JetMatching:nQmatch = 5', #5 corresponds to 5-flavour scheme (no matching of b-quarks), 5 for 5-flavour scheme
+        'JetMatching:nJetMax = 1', #number of partons in born matrix element for highest multiplicity
         ),
         parameterSets = cms.vstring('processParameters')
     )

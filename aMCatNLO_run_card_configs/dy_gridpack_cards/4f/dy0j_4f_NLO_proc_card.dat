@@ -1,0 +1,10 @@
+import model loop_sm
+
+define p = p
+define j = j
+define ell+ = e+ mu+ 
+define ell- = e- mu-
+
+generate p p > ell+ ell- /h [QCD]
+output dy0j_4f_NLO
+

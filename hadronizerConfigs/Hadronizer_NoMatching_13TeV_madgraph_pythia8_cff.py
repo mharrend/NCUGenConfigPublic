@@ -51,7 +51,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
     splitLevel = cms.untracked.int32(0),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     outputCommands = process.RAWSIMEventContent.outputCommands,
-    fileName = cms.untracked.string('GEN.root'),
+    fileName = cms.untracked.string(options.outputFile),
     dataset = cms.untracked.PSet(
         filterName = cms.untracked.string(''),
         dataTier = cms.untracked.string('GEN-SIM')
@@ -76,10 +76,13 @@ process.generator = cms.EDFilter("Pythia8HadronizerFilter",
     comEnergy = cms.double(13000.0),
     PythiaParameters = cms.PSet(
         processParameters = cms.vstring('Main:timesAllowErrors    = 10000', 
-            'ParticleDecays:limitTau0 = on', 
-            'ParticleDecays:tauMax = 10', 
-            'Tune:ee 3', 
-            'Tune:pp 5'),
+					'ParticleDecays:limitTau0 = on', 
+					'ParticleDecays:tauMax = 10', 
+					'Tune:ee 3', 
+					'Tune:pp 5',
+					'SLHA:keepSM = on',
+					'SLHA:minMassSM = 1000.',       
+					'Check:epTolErr = 0.01'),
         parameterSets = cms.vstring('processParameters')
     )
 )

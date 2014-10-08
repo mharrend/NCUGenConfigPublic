@@ -1,18 +1,16 @@
 # Auto generated configuration file
 # using: 
-# Revision: 1.20 
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: Configuration/GenProduction/python/ThirteenTeV/Hadronizer_Tune4C_13TeV_aMCatNLO_LHE_pythia8_cff.py --step GEN --conditions auto:mc --pileup NoPileUp --datamix NODATAMIXER --eventcontent RAWSIM --datatier GEN-SIM --no_exec --python_filename=Hadronizer_Tune4C_13TeV_aMCatNLO_LHE_pythia8_cff.py
+# Revision: 1.381.2.28 
+# Source: /local/reps/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v 
+# with command line options: Configuration/Generator/python/Hadronizer_LO_cff.py --step GEN --conditions auto:mc --pileup NoPileUp --datamix NODATAMIXER --eventcontent RAWSIM --datatier GEN-SIM --no_exec --python_filename=Hadronizer_TuneCUEP8M1_NoMatching_13TeV_LO.py
 import FWCore.ParameterSet.Config as cms
+
+process = cms.Process('GEN')
 
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 options.parseArguments()
 
-
-
-
-process = cms.Process('GEN')
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -32,17 +30,19 @@ process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
 )
 
+# Input source
 process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 # Input source for LHE source
 process.source = cms.Source("LHESource",
-    fileNames = cms.untracked.vstring(options.inputFiles)
+fileNames = cms.untracked.vstring(options.inputFiles)
 )
+
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    version = cms.untracked.string('$Revision: 1.20 $'),
-    annotation = cms.untracked.string('Configuration/GenProduction/python/ThirteenTeV/Hadronizer_Tune4C_13TeV_aMCatNLO_LHE_pythia8_cff.py nevts:1'),
-    name = cms.untracked.string('Applications')
+    version = cms.untracked.string('$Revision: 1.381.2.28 $'),
+    annotation = cms.untracked.string('Configuration/Generator/python/Hadronizer_LO_cff.py nevts:1'),
+    name = cms.untracked.string('PyReleaseValidation')
 )
 
 # Output definition
@@ -75,26 +75,21 @@ process.generator = cms.EDFilter("Pythia8HadronizerFilter",
     comEnergy = cms.double(13000.0),
     maxEventsToPrint = cms.untracked.int32(1),
     PythiaParameters = cms.PSet(
-        processParameters = cms.vstring('Main:timesAllowErrors    = 10000', 
-            'ParticleDecays:limitTau0 = on', 
-            'ParticleDecays:tau0Max = 10', 
-            'Tune:ee 3', 
-            'Tune:pp 5', 
-            'SpaceShower:pTmaxMatch = 1', 
-            'SpaceShower:pTmaxFudge = 1', 
-            'SpaceShower:MEcorrections = off', 
-            'TimeShower:pTmaxMatch = 1', 
-            'TimeShower:pTmaxFudge = 1', 
-            'TimeShower:MEcorrections = off', 
-            'TimeShower:globalRecoil = on', 
-            'TimeShower:limitPTmaxGlobal = on', 
-            'TimeShower:nMaxGlobalRecoil = 1', 
-            'TimeShower:globalRecoilMode = 2', 
-            'TimeShower:nMaxGlobalBranch = 1', 
+        pythia8CommonSettings = cms.vstring('Main:timesAllowErrors = 10000', 
+            'Check:epTolErr = 0.01', 
             'SLHA:keepSM = on', 
             'SLHA:minMassSM = 1000.', 
-            'Check:epTolErr = 0.01'),
-        parameterSets = cms.vstring('processParameters')
+            'ParticleDecays:limitTau0 = on', 
+            'ParticleDecays:tau0Max = 10', 
+            'ParticleDecays:allowPhotonRadiation = on', 
+            'ParticleDecays:tauIgnoreSpinUpCMSSW = on'),
+        pythia8CUEP8M1Settings = cms.vstring('Tune:pp 14', 
+            'Tune:ee 7', 
+            'MultipartonInteractions:pT0Ref=2.4024', 
+            'MultipartonInteractions:ecmPow=2.5208', 
+            'MultipartonInteractions:expPow=1.6'),
+        parameterSets = cms.vstring('pythia8CommonSettings', 
+            'pythia8CUEP8M1Settings')
     )
 )
 

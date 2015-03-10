@@ -23,7 +23,7 @@ process.load('Configuration.StandardSequences.Generator_cff')
 process.load('IOMC.EventVertexGenerators.VtxSmearedNominalCollision2015_cfi')
 process.load('GeneratorInterface.Core.genFilterSummary_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
@@ -63,7 +63,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 process.genstepfilter.triggerConditions=cms.vstring("generation_step")
-from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:mc', '')
 
 process.generator = cms.EDFilter("Pythia8HadronizerFilter",

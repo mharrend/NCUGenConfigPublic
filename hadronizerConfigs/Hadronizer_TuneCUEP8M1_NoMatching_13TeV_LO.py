@@ -69,8 +69,7 @@ process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:mc', '')
 process.generator = cms.EDFilter("Pythia8HadronizerFilter",
     PythiaParameters = cms.PSet(
         parameterSets = cms.vstring('pythia8CommonSettings', 
-            'pythia8CUEP8M1Settings', 
-            'JetMatchingParameters'),
+            'pythia8CUEP8M1Settings'),
         pythia8CUEP8M1Settings = cms.vstring('Tune:pp 14', 
             'Tune:ee 7', 
             'MultipartonInteractions:pT0Ref=2.4024', 

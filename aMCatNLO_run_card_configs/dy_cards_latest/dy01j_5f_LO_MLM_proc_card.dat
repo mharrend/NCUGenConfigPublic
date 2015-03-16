@@ -1,0 +1,14 @@
+import model sm-ckm_lepton_masses_no_b_mass	
+#switch to diagonal ckm matrix if relevant for speed
+#import model sm-lepton_masses_no_b_mass
+define p = p b b~
+define j = j b b~
+define ell+ = e+ mu+
+define ell- = e- mu-
+
+generate p p > ell+ ell- /h @0
+add process p p > ell+ ell- j /h @1
+
+
+output dy01j_5f_LO_MLM 
+
